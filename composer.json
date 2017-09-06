@@ -1,0 +1,21 @@
+{
+    "name": "kra/lame",
+    "version": "1.0.0",
+    "description": "Set up the Laravel and Homestead",
+    "type": "script",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kra8",
+            "email": "koki@asai.email"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Lame\\" : "src/"
+        }
+    },
+    "require": {
+        "symfony/console": "^3.3"
+    }
+}
