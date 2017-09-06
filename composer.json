@@ -1,9 +1,10 @@
 {
-    "name": "kra/lame",
+    "name": "kra8/lame",
     "version": "1.0.0",
     "description": "Set up the Laravel and Homestead",
     "type": "script",
     "license": "MIT",
+    "keywords": ["laravel", "lame"],
     "authors": [
         {
             "name": "Kra8",
@@ -17,5 +18,8 @@
     },
     "require": {
         "symfony/console": "^3.3"
-    }
+    },
+    "bin": [
+        "bin/lame"
+    ]
 }
