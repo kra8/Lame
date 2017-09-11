@@ -14,6 +14,8 @@ composer global require "kra8/lame"
 
 ## Require
 LaravelとHomesteadを動かすには、以下のソフトウェアをインストールしておく必要があります。
+
+* PHP 7.1
 * VirtualBox
 * Vagrant
 * Laravel
