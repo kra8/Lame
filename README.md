@@ -18,4 +18,3 @@ LaravelとHomesteadを動かすには、以下のソフトウェアをインス�
 * PHP 7.1.3以上
 * VirtualBox
 * Vagrant
-* macOS
