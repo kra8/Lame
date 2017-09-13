@@ -47,7 +47,7 @@ class NewCommand extends Command
         mkdir($projectPath);
 
         // Create a laravel project
-        $execute = 'laravel new ' . $projectName . '/app';
+        $execute = $_SERVER['HOME'] . '/.composer/vendor/bin/laravel new ' . $projectName . '/app';
         shell_exec($execute);
 
         // Setup Homestead
@@ -59,10 +59,23 @@ class NewCommand extends Command
         $execute = 'php vendor/bin/homestead make';
         shell_exec($execute);
 
+        // buckup setting file
+        $execute = 'cp Homestead.yaml Homestead.yaml.org';
+        shell_exec($execute);
+
+        // setting homestead
+        $yaml    = file_get_contents('Homestead.yaml');
+        $yaml    = str_replace($projectPath, $projectPath . '/app', $yaml);
+        $yaml    = str_replace('ip: 192.168.10.10','ip: 10.0.0.33', $yaml);
+
+        file_put_contents('Homestead.yaml', $newYaml);
+
         chdir($pwd);
 
-        $output->writeln('<info>Complete.</info>');
-        $output->writeln('<comment>You should editing Homestead.yaml, then run the "vagrant up".</comment>');
+        $output->writeln('<info>==== Complete ====</info>');
+        $output->writeln("<comment>1. Run the 'cd {$projectName}''</comment>");
+        $output->writeln("<comment>2. Run the 'vagrant up'</comment>");
+        $output->writeln("<comment>3. Open the http://10.0.0.33</comment>");
     }
 
 }
