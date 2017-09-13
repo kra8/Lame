@@ -68,12 +68,12 @@ class NewCommand extends Command
         $yaml    = str_replace($projectPath, $projectPath . '/app', $yaml);
         $yaml    = str_replace('ip: 192.168.10.10','ip: 10.0.0.33', $yaml);
 
-        file_put_contents('Homestead.yaml', $newYaml);
+        file_put_contents('Homestead.yaml', $yaml);
 
         chdir($pwd);
 
         $output->writeln('<info>==== Complete ====</info>');
-        $output->writeln("<comment>1. Run the 'cd {$projectName}''</comment>");
+        $output->writeln("<comment>1. Run the 'cd {$projectName}'</comment>");
         $output->writeln("<comment>2. Run the 'vagrant up'</comment>");
         $output->writeln("<comment>3. Open the http://10.0.0.33</comment>");
     }
