@@ -12,14 +12,6 @@ class NewCommand extends Command
 {
     private $signature = 'new';
 
-    private $arguments   = [
-        'name' => InputArgument::REQUIRED,
-    ];
-
-    private $options = [
-        'target' => InputOption::VALUE_REQUIRED,
-    ];
-
     protected function configure()
     {
         $this->setName($this->signature);
@@ -47,7 +39,7 @@ class NewCommand extends Command
         mkdir($projectPath);
 
         // Create a laravel project
-        $execute = $_SERVER['HOME'] . '/.composer/vendor/bin/laravel new ' . $projectName . '/app';
+        $execute = $_SERVER['HOME'] . '/.composer/vendor/bin/laravel new ' . $projectName . '/laravel';
         shell_exec($execute);
 
         // Setup Homestead
@@ -65,11 +57,21 @@ class NewCommand extends Command
 
         // setting homestead
         $yaml    = file_get_contents('Homestead.yaml');
-        $yaml    = str_replace($projectPath, $projectPath . '/app', $yaml);
+        $yaml    = str_replace($projectPath, $projectPath . '/laravel', $yaml);
         $yaml    = str_replace('ip: 192.168.10.10','ip: 10.0.0.33', $yaml);
 
         file_put_contents('Homestead.yaml', $yaml);
 
+        // generate env file
+        chdir($projectPath . '/laravel');
+
+        $execute = 'cp -p .env.example .env';
+        shell_exec($execute);
+
+        $execute = 'php artisan key:generate';
+        shell_exec($execute);
+
+        // return pwd
         chdir($pwd);
 
         $output->writeln('<info>==== Complete ====</info>');
