@@ -1,6 +1,6 @@
 {
     "name": "kra8/lame",
-    "version": "v1.0.3",
+    "version": "v1.0.4",
     "description": "Set up the Laravel and Homestead",
     "type": "script",
     "license": "MIT",
