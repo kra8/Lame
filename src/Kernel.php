@@ -3,11 +3,6 @@
 namespace Lame;
 
 use Symfony\Component\Console\Application;
-// use Command\AnalizeCommand;
-
-// $app = new Application();
-// $app->add(new AnalizeCommand($container));
-// $app->run();
 
 class Kernel
 {
