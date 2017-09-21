@@ -12,12 +12,15 @@ class NewCommand extends Command
 {
     private $signature = 'new';
 
+    private $defaultPrivateIP = '10.0.0.33';
+
     protected function configure()
     {
         $this->setName($this->signature);
         $this->setDescription('Create a new laravel and homestead project.');
         $this->addArgument('name', InputArgument::REQUIRED, 'Project name');
-        $this->addOption('target', 't', InputOption::VALUE_REQUIRED, 'Select install laravel application version');
+        // $this->addOption('target', 't', InputOption::VALUE_REQUIRED, 'Select install laravel application version');
+        $this->addOption('ip', 'i', InputOption::VALUE_REQUIRED, 'Select private ip address', $this->defaultPrivateIP);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -25,6 +28,13 @@ class NewCommand extends Command
         $pwd         = $_SERVER['PWD'];
         $projectName = $input->getArgument('name');
         $projectPath = $pwd . '/' . $projectName;
+        $privateIP   = $input->getOption('ip');
+
+        // validate option argument
+        if (! $this->validatePrivateIP($privateIP)) {
+            $output->writeln('<error>ERROR: Private ID that can be specified are "10.0.0.0/8", "172.16.0.0/12", and "192.168.0.0/16" .</error>');
+            exit(1);
+        }
 
         // if exist file
         if (file_exists($projectPath)) {
@@ -58,7 +68,7 @@ class NewCommand extends Command
         // setting homestead
         $yaml    = file_get_contents('Homestead.yaml');
         $yaml    = str_replace($projectPath, $projectPath . '/laravel', $yaml);
-        $yaml    = str_replace('ip: 192.168.10.10','ip: 10.0.0.33', $yaml);
+        $yaml    = str_replace('ip: 192.168.10.10','ip: ' . $privateIP, $yaml);
 
         file_put_contents('Homestead.yaml', $yaml);
 
@@ -77,7 +87,18 @@ class NewCommand extends Command
         $output->writeln('<info>==== Complete ====</info>');
         $output->writeln("<comment>1. Run the 'cd {$projectName}'</comment>");
         $output->writeln("<comment>2. Run the 'vagrant up'</comment>");
-        $output->writeln("<comment>3. Open the http://10.0.0.33</comment>");
+        $output->writeln("<comment>3. Open the http://{$privateIP}</comment>");
+    }
+
+    protected function validatePrivateIP(String $ip)
+    {
+        $classA = '/^10\.(([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){2}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/';
+        $classB = '/^172\.(1[6-9]|2[0-9]|3[0-1])\.([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/';
+        $classC = '/^192\.168\.([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/';
+
+        $result = (preg_match($classA, $ip) || preg_match($classB, $ip) || preg_match($classC, $ip));
+
+        return $result;
     }
 
 }
