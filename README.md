@@ -1,9 +1,22 @@
 # Lame
-Laravel + Homestead の環境を整える  
+Laravel + Homestead の環境を整える
+
+## Version 1.1.0
+### Adaptコマンドを作成
+Adaptコマンドは既存のLaravelプロジェクトに対してHomesteadを適応することができます。
+
+ex.
+```
+git clone <repository_path>
+lame adapt <repository_name>
+```
 
 ## Usage
 * `lame new <project_name>`  
 project_nameという新規プロジェクトを作成する。
+
+* `lame adapt <project_name>`  
+Adaptコマンドは既存のLaravelプロジェクトに対してHomesteadを適応する。
 
 ## Install
 ```
