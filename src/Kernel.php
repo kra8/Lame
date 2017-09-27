@@ -10,6 +10,7 @@ class Kernel
 
     private $commands = [
         'Lame\Command\NewCommand',
+        'Lame\Command\AdaptCommand',
     ];
 
     public function __construct()
