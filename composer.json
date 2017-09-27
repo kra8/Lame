@@ -4,7 +4,7 @@
     "description": "Set up the Laravel and Homestead",
     "type": "script",
     "license": "MIT",
-    "keywords": ["laravel", "lame"],
+    "keywords": ["laravel", "lame", "homestead"],
     "authors": [
         {
             "name": "kra8",
