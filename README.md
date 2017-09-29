@@ -16,7 +16,7 @@ lame adapt <repository_name>
 project_nameという新規プロジェクトを作成する。
 
 * `lame adapt <project_name>`  
-Adaptコマンドは既存のLaravelプロジェクトに対してHomesteadを適応する。
+既存のLaravelプロジェクトに対してHomesteadを適応する。
 
 ## Install
 ```
