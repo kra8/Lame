@@ -70,6 +70,9 @@ class LameCommand extends Command
         $pwd = $_SERVER['PWD'];
         chdir($path);
 
+        $execute = 'composer install';
+        shell_exec($execute);
+
         $execute = 'cp -p .env.example .env';
         shell_exec($execute);
 
