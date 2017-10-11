@@ -1,3 +1,8 @@
+# 注意
+こちらは古いバージョンです。  
+新しいバージョン https://github.com/kra8/Lastead.git
+
+
 # Lame
 Laravel + Homestead の環境を整える
 
